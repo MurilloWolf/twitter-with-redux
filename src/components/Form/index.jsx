@@ -1,45 +1,58 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './styles.css';
 
-export default function Form() {
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [tweetInput, setTweetInput] = useState('');
-  const imageUrl = 'https://avatars.githubusercontent.com/u/32676014?s=400&u=55762815361e5e2ac574c712de51c2deb724b116&v=4';
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isDisabled: true,
+      tweetInput: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-  const handleSubmit = (event) => {
+  static handleSubmit(event) {
     event.preventDefault();
-  };
+  }
 
-  const handleChange = ({ target: { value } }) => {
-    setIsDisabled(!value.trim());
-    setTweetInput(value.trim());
-  };
+  handleChange({ target: { value } }) {
+    this.setState({
+      isDisabled: !value.trim(),
+      tweetInput: value.trim(),
+    });
+  }
 
-  return (
-    <div className="container">
-      <div>
-        <div className="avatar">
-          <img alt="user-avatar" src={imageUrl} />
-        </div>
-        <div className="form-input">
-          <form onSubmit={handleSubmit}>
-            <textarea
-              onChange={handleChange}
-              maxLength={120}
-              value={tweetInput}
-              placeholder="What's happening?"
-            />
-            <button
-              className="btn-twitter"
-              disabled={isDisabled}
-              type="submit"
-            >
-              Tweet
+  render() {
+    const { isDisabled, tweetInput } = this.state;
+    const imageUrl = 'https://avatars.githubusercontent.com/u/32676014?s=400&u=55762815361e5e2ac574c712de51c2deb724b116&v=4';
+    return (
+      <div className="container">
+        <div>
+          <div className="avatar">
+            <img alt="user-avatar" src={imageUrl} />
+          </div>
+          <div className="form-input">
+            <form onSubmit={this.handleSubmit}>
+              <textarea
+                onChange={this.handleChange}
+                maxLength={120}
+                value={tweetInput}
+                placeholder="What's happening?"
+              />
+              <button
+                className="btn-twitter"
+                disabled={isDisabled}
+                type="submit"
+              >
+                Tweet
 
-            </button>
-          </form>
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
+
+export default Form;
