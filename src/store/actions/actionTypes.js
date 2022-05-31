@@ -1,0 +1,4 @@
+const TWEETAR = 'TWEETAR';
+const DELETE_TWEET = 'DELETE_TWEET';
+
+export { TWEETAR, DELETE_TWEET };

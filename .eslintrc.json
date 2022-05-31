@@ -1,8 +1,7 @@
 {
     "env": {
         "browser": true,
-        "es2021": true,
-        "jest/globals": true
+        "es2021": true
     },
     "extends": [
         "plugin:react/recommended",
@@ -16,12 +15,14 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "jest"
     ],
     "rules": {
         "react/prefer-stateless-function":"off",
         "react/state-in-constructor": "off",
         "react/no-did-mount-set-state": "off",
-        "react/no-did-update-set-state": "warn"
+        "react/no-did-update-set-state": "warn",
+        "default-param-last": "off"
     }
 }
