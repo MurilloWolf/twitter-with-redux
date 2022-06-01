@@ -3,6 +3,11 @@ import './styles.css';
 
 class Tweet extends React.Component {
   render() {
+    const {
+      info: {
+        name, message, date, username,
+      },
+    } = this.props;
     const imageUrl = 'https://avatars.githubusercontent.com/u/32676014?s=400&u=55762815361e5e2ac574c712de51c2deb724b116&v=4';
     return (
       <div className="tweet-container">
@@ -13,18 +18,18 @@ class Tweet extends React.Component {
           <div className="tweet-body">
             <div>
               <p className="tweet-title">
-                Murillo wolf
+                {name}
                 <span>
                   {'\t-\t'}
-                  @murillowolf
+                  {username}
                 </span>
                 <span>
                   {'\t-\t'}
-                  May 12
+                  {date}
                 </span>
               </p>
               <br />
-              <p>Ola gente, esse é meu primeiro tweet</p>
+              <p>{message}</p>
             </div>
           </div>
         </div>

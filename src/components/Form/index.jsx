@@ -1,5 +1,7 @@
 import React from 'react';
 import './styles.css';
+import { connect } from 'react-redux';
+import { actCreatorNewTweet } from '../../store/actions/user';
 
 class Form extends React.Component {
   constructor(props) {
@@ -9,21 +11,34 @@ class Form extends React.Component {
       tweetInput: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  static handleSubmit(event) {
+  handleSubmit(event) {
     event.preventDefault();
+    const { salvarTweet } = this.props;
+    const { tweetInput } = this.state;
+
+    salvarTweet({
+      message: tweetInput,
+      name: 'Murillo wolf',
+      username: '@wolf',
+      date: '15 May',
+    });
+
+    this.setState({ isDisabled: true, tweetInput: '' });
   }
 
   handleChange({ target: { value } }) {
     this.setState({
       isDisabled: !value.trim(),
-      tweetInput: value.trim(),
+      tweetInput: value,
     });
   }
 
   render() {
     const { isDisabled, tweetInput } = this.state;
+    console.log(this.props);
     const imageUrl = 'https://avatars.githubusercontent.com/u/32676014?s=400&u=55762815361e5e2ac574c712de51c2deb724b116&v=4';
     return (
       <div className="container">
@@ -45,7 +60,6 @@ class Form extends React.Component {
                 type="submit"
               >
                 Tweet
-
               </button>
             </form>
           </div>
@@ -55,4 +69,10 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+// mapDispatchToProps
+
+const mapDispatchToProps = (dispatch) => ({
+  salvarTweet: (payload) => dispatch(actCreatorNewTweet(payload)),
+});
+// connect( null, ESCREVER ) (COMPONENTE)
+export default connect(null, mapDispatchToProps)(Form);

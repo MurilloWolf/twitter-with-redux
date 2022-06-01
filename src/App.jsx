@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
 import Form from './components/Form';
-import Tweets from './components/Tweets';
+import TimeLine from './components/TimeLine';
 
 class App extends React.Component {
   render() {
     return (
       <div>
         <Form />
-        <Tweets />
+        <TimeLine />
       </div>
     );
   }
